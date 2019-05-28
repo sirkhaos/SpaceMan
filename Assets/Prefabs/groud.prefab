@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7801523795839963066}
   - component: {fileID: 4896325515862292684}
   - component: {fileID: 3246866712674507670}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: groud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
