@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
+        levelStartPosition = GameObject.Find("LevelStart").transform;
         if (sharedInstance == null)
         {
             sharedInstance = this;
@@ -20,7 +21,7 @@ public class LevelManager : MonoBehaviour
     //lista de los niveles cargados
     public List<LevelBlock> currentLevelBlocks = new List<LevelBlock>();
     //posision de el primer levels
-    public Transform levelStartPosition;
+    private Transform levelStartPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -34,10 +35,30 @@ public class LevelManager : MonoBehaviour
         
     }
 
+    //agrega un nuevo level block al final.
     public void AddLevelBlock()
     {
-        //agrega un nuevo level block al final .
-        //TODO: crear logica de pocicionar el nuevo levelbock
+        int randomIdx = Random.Range(1, allTheLevelBlocks.Count);
+
+        LevelBlock block;
+
+        Vector3 spawnPosition = Vector3.zero;
+
+        if (currentLevelBlocks.Count == 0)
+        {
+            block = Instantiate(allTheLevelBlocks[0]);
+            spawnPosition = levelStartPosition.position;
+        }
+        else
+        {
+            block = Instantiate(allTheLevelBlocks[randomIdx]);
+            spawnPosition = currentLevelBlocks[currentLevelBlocks.Count - 1].exitPoint.position;
+        }
+        block.transform.SetParent(this.transform, false);
+        Vector3 correction = new Vector3(   spawnPosition.x - block.startPoint.position.x,
+                                            spawnPosition.y - block.startPoint.position.y, 0);
+        block.transform.position += correction;
+        currentLevelBlocks.Add(block);
     }
 
     public void RemoveLevelBlock()
@@ -55,7 +76,7 @@ public class LevelManager : MonoBehaviour
     public void GenerateInitialBlocks()
     {
         //genera los bloques iniciales del juego 
-        for(int i = 0; i < 2; i++)
+        for(int i = 0; i < 20; i++)
         {
             AddLevelBlock();
         }
