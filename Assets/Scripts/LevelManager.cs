@@ -61,22 +61,27 @@ public class LevelManager : MonoBehaviour
         currentLevelBlocks.Add(block);
     }
 
+    //quita el level block que deja de ser visto
     public void RemoveLevelBlock()
     {
-        //quita el level block que deja de ser visto
-        //TODO: crear la logica de eliminar los level block en desuso
+        LevelBlock oldblock = currentLevelBlocks[0];
+        currentLevelBlocks.Remove(oldblock);
+        Destroy(oldblock.gameObject);
     }
 
+    //Quita todos los level block al resetiar la partida
     public void RemoveAllLevelBlock()
     {
-        //Quita todos los level block al resetiar la partida
-        //TODO: crear la logica de limpiar el nivel.
+        while (currentLevelBlocks.Count > 0)
+        {
+            RemoveLevelBlock();
+        }
     }
 
+    //genera los bloques iniciales del juego
     public void GenerateInitialBlocks()
     {
-        //genera los bloques iniciales del juego 
-        for(int i = 0; i < 20; i++)
+        for(int i = 0; i < 2; i++)
         {
             AddLevelBlock();
         }
