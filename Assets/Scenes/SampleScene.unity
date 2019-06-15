@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -146,6 +147,22 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c36c57ac7e6dc84389c9ef07f166a7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 584642304}
+  offset: {x: -3, y: 0, z: -10}
+  dampingTime: 0.3
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -206,6 +223,12 @@ Transform:
 --- !u!1 &584642301 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7514997989726958061, guid: d4b26daad7ebd8645ba95994ad66c0f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7514997990301097744}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &584642304 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7514997989726957584, guid: d4b26daad7ebd8645ba95994ad66c0f7,
     type: 3}
   m_PrefabInstance: {fileID: 7514997990301097744}
   m_PrefabAsset: {fileID: 0}
