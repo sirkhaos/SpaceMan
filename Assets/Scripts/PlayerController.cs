@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         this.transform.position = startPos;
         rBPlayer.velocity = Vector2.zero;
+        Camera.main.GetComponent<CameraFollow>().ResetCameraPosition();
     }
 
     //update a rango fijo no por frame

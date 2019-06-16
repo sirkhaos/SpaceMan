@@ -67,8 +67,12 @@ public class GameManager : MonoBehaviour
         }else if(newGameState== GameState.inGame)
         {
             //TODO: hacer a logica de el juego
+            //creo que deveria ir en gameover
+            LevelManager.sharedInstance.RemoveAllLevelBlock();
+            LevelManager.sharedInstance.GenerateInitialBlocks();
             controller.StartGame();
-        }else if (newGameState == GameState.gameOver)
+        }
+        else if (newGameState == GameState.gameOver)
         {
             //TODO: preparar el juego para el game over
         }
