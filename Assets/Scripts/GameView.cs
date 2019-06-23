@@ -18,7 +18,7 @@ public class GameView : MonoBehaviour
     {
         if (GameManager.ShareInstans.currentGameState == GameState.inGame)
         {
-            int coints = 0;
+            int coints = GameManager.ShareInstans.collectedObject;
             float Score = 0;
             float MaxScore = 0;
 

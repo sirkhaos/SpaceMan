@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameState currentGameState=GameState.menu;
     //creando un singleton del Game Manager
     public static GameManager ShareInstans;
+    public int collectedObject = 0;
+
     private PlayerController controller;
 
     private void Awake()
@@ -80,5 +82,10 @@ public class GameManager : MonoBehaviour
             UIManager.sharedInstance.ShowMainMenu();
         }
         this.currentGameState = newGameState;
+    }
+
+    public void CollectObject(Collectable collectable)
+    {
+        collectedObject += collectable.value;
     }
 }
