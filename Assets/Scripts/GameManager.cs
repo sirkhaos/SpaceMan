@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         if (newGameState == GameState.menu)
         {
             //TODO: hacer la logica de menu
+            UIManager.sharedInstance.ShowMainMenu();
         }else if(newGameState== GameState.inGame)
         {
             //TODO: hacer a logica de el juego
@@ -71,10 +72,12 @@ public class GameManager : MonoBehaviour
             LevelManager.sharedInstance.RemoveAllLevelBlock();
             LevelManager.sharedInstance.GenerateInitialBlocks();
             controller.StartGame();
+            UIManager.sharedInstance.HideMainMenu();
         }
         else if (newGameState == GameState.gameOver)
         {
             //TODO: preparar el juego para el game over
+            UIManager.sharedInstance.ShowMainMenu();
         }
         this.currentGameState = newGameState;
     }
