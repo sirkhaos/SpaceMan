@@ -6,6 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager sharedInstance;
     public Canvas menuCanvas;
+    public Canvas inGameUI;
 
     private void Awake()
     {
@@ -18,11 +19,18 @@ public class UIManager : MonoBehaviour
     public void ShowMainMenu()
     {
         menuCanvas.enabled = true;
+        inGameUI.enabled = false;
     }
 
     public void HideMainMenu()
     {
         menuCanvas.enabled = false;
+        ShowInGameUI();
+    }
+
+    public void ShowInGameUI()
+    {
+        inGameUI.enabled = true;
     }
 
     public void ExitGame()

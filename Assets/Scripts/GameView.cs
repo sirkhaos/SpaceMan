@@ -24,7 +24,7 @@ public class GameView : MonoBehaviour
 
             coinsText.text = coints.ToString("00000");
             scoreText.text = "Score: "+Score.ToString("0000000.0");
-            maxScoreText.text = "TopScore: " + MaxScore.ToString("0000000.0");
+            maxScoreText.text = "TopScore: " + MaxScore.ToString("0000000.0");   
         }
     }
 }
