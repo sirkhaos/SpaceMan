@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float jumpFoce = 8f;
     public float speed = 2f;
     public LayerMask groundMask;
+    public int healthPoints, manaPoints;
 
     //propiedades internas o privadas
     private Rigidbody2D rBPlayer;
@@ -20,6 +21,9 @@ public class PlayerController : MonoBehaviour
     private const string INGROUND = "isOnTheGround";
     private const string ISAlIVE = "isALive";
     private const string DIALOG = "Dialogo";
+
+    public const int INITIAL_HEALTH = 100, INITIAL_MANA = 15, MAX_HEALTH = 200, MAX_MANA = 30, MIN_HEALTH = 10, MIN_MANA = 0;
+
 
     //la primera llamada
     private void Awake()
@@ -37,7 +41,10 @@ public class PlayerController : MonoBehaviour
     {
         aniPlayer.SetBool(ISAlIVE, true);
         aniPlayer.SetBool(INGROUND, true);
-        
+
+        healthPoints = INITIAL_HEALTH;
+        manaPoints = INITIAL_MANA;
+
         Invoke("ResetPosition", 0.28f);//ejecuta despues de un tiempo el metodo
     }
 
@@ -106,5 +113,33 @@ public class PlayerController : MonoBehaviour
     {
         aniPlayer.SetBool("isALive", false);
         GameManager.ShareInstans.EndGame();
+    }
+
+    public void CollectHealth(int points)
+    {
+        this.healthPoints += points;
+        if (this.healthPoints >= MAX_HEALTH)
+        {
+            this.healthPoints = MAX_HEALTH;
+        }
+    }
+
+    public void CollectMana(int points)
+    {
+        this.manaPoints += points;
+        if (this.manaPoints >= MAX_MANA)
+        {
+            this.manaPoints = MAX_MANA;
+        }
+    }
+
+    public int GetHealth()
+    {
+        return healthPoints;
+    }
+    
+    public int GetMana()
+    {
+        return manaPoints;
     }
 }

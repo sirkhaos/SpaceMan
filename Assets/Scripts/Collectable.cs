@@ -17,6 +17,7 @@ public class Collectable : MonoBehaviour
 
     private SpriteRenderer sprite;
     private CircleCollider2D itemCollider;
+    GameObject player;
 
     bool hasBeenCollected = false;
 
@@ -24,6 +25,11 @@ public class Collectable : MonoBehaviour
     {
         sprite = GetComponent<SpriteRenderer>();
         itemCollider = GetComponent<CircleCollider2D>();
+    }
+
+    private void Start()
+    {
+        player = GameObject.Find("Player");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -58,10 +64,10 @@ public class Collectable : MonoBehaviour
                 GameManager.ShareInstans.CollectObject(this); 
                 break;
             case CollectableType.HealthPotion:
-                //TODO: logica de la posion de vida
+                player.GetComponent<PlayerController>().CollectHealth(this.value);
                 break;
             case CollectableType.ManaPotion:
-                //TODO: logica de la posion de mana
+                player.GetComponent<PlayerController>().CollectMana(this.value);
                 break;
         }
     }
