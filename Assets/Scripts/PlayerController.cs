@@ -23,7 +23,8 @@ public class PlayerController : MonoBehaviour
     private const string DIALOG = "Dialogo";
 
     public const int INITIAL_HEALTH = 100, INITIAL_MANA = 15, MAX_HEALTH = 200, MAX_MANA = 30, MIN_HEALTH = 10, MIN_MANA = 0;
-
+    public const int SUPERJUMP_COST = 5;
+    public const float SUPERJUMP_FORCE = 1.5f;
 
     //la primera llamada
     private void Awake()
@@ -80,19 +81,29 @@ public class PlayerController : MonoBehaviour
         }*/
         if (Input.GetButtonDown("Jump"))
         {
-            jump();
+            jump(false);
+        }
+        if (Input.GetButtonDown("Fire1"))
+        {
+            jump(true);
         }
 
         Debug.DrawRay(this.transform.position, Vector2.down * rangeColl, Color.red);
     }
 
-    void jump()
+    void jump(bool super)
     {
+        float jumpForceFactor = jumpFoce;
+        if (super && manaPoints >= SUPERJUMP_COST) 
+        {
+            manaPoints -= SUPERJUMP_COST;
+            jumpForceFactor *= SUPERJUMP_FORCE;
+        }
         if (IsTouchingTheGround())
         {
             if (GameManager.ShareInstans.currentGameState == GameState.inGame)
             {
-                rBPlayer.AddForce(Vector2.up * jumpFoce, ForceMode2D.Impulse);
+                rBPlayer.AddForce(Vector2.up * jumpForceFactor, ForceMode2D.Impulse);
             }
         }
     }
@@ -111,6 +122,13 @@ public class PlayerController : MonoBehaviour
     }
     public void die()
     {
+        float Score = GetTravelledDistance();
+        float MaxScore = PlayerPrefs.GetFloat("MaxScore", 0f);
+
+        if(Score> MaxScore)
+        {
+            PlayerPrefs.SetFloat("MaxScore", Score);
+        }
         aniPlayer.SetBool("isALive", false);
         GameManager.ShareInstans.EndGame();
     }
@@ -141,5 +159,9 @@ public class PlayerController : MonoBehaviour
     public int GetMana()
     {
         return manaPoints;
+    }
+    public float GetTravelledDistance()
+    {
+        return this.transform.position.x - startPos.x;
     }
 }
