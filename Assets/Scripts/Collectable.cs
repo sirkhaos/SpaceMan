@@ -61,7 +61,8 @@ public class Collectable : MonoBehaviour
         switch (this.type)
         {
             case CollectableType.Money:
-                GameManager.ShareInstans.CollectObject(this); 
+                GameManager.ShareInstans.CollectObject(this);
+                GetComponent<AudioSource>().Play();
                 break;
             case CollectableType.HealthPotion:
                 player.GetComponent<PlayerController>().CollectHealth(this.value);

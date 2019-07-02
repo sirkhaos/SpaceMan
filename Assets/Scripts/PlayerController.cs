@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rBPlayer;
     private Animator aniPlayer;
     [SerializeField]
-    private float rangeColl = 1.3f;
+    private float rangeColl = 2f;
     private Vector3 startPos;
 
     //constantes
@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour
         {
             if (GameManager.ShareInstans.currentGameState == GameState.inGame)
             {
+                GetComponent<AudioSource>().Play();
                 rBPlayer.AddForce(Vector2.up * jumpForceFactor, ForceMode2D.Impulse);
             }
         }
@@ -120,7 +121,7 @@ public class PlayerController : MonoBehaviour
             return false;
         }
     }
-    public void die()
+    public void Die()
     {
         float Score = GetTravelledDistance();
         float MaxScore = PlayerPrefs.GetFloat("MaxScore", 0f);
@@ -139,6 +140,10 @@ public class PlayerController : MonoBehaviour
         if (this.healthPoints >= MAX_HEALTH)
         {
             this.healthPoints = MAX_HEALTH;
+        }
+        if (this.healthPoints <= 0)
+        {
+            Die();
         }
     }
 

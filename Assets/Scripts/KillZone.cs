@@ -9,7 +9,7 @@ public class KillZone : MonoBehaviour
         if (collision.tag.Equals("Player"))
         {
             PlayerController controller = collision.GetComponent<PlayerController>();
-            controller.die();
+            controller.Die();
         }
     }
 }
